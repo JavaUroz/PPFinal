@@ -58,9 +58,7 @@ def interfaz_novato(data):
     else:
         st.subheader('Listado de vehiculos recomendados')
         st._arrow_table(
-        ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
-                                                                                               ascending=False),
-        )
+        ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion', ascending=False))
 
 
 def interfaz_experto(data):
