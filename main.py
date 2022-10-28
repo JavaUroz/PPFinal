@@ -8,16 +8,16 @@ from sqlalchemy import create_engine
 level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
 
 # Conexión con SQLAlchemy
-path = '.\data/'
-database = 'DSS.db'
-my_conn=create_engine('sqlite:///'+path+database)
+# path = '.\data/'
+# database = 'DSS.db'
+# my_conn=create_engine('sqlite:///'+path+database)
 
 # Carga los datos de la aplicación
-#vehiculos = pd.read_csv('./data/vehiculos.csv')
-#precios = pd.read_csv('./data/precios.csv', dtype={'Precio': float})
-data_vehiculos = pd.read_sql_table('autos', my_conn)
-data_precios = pd.read_sql_table('precios', my_conn)
-data_criterios = pd.read_sql_table('criterios', my_conn)
+data_vehiculos = pd.read_csv('./data/vehiculos.csv')
+data_precios = pd.read_csv('./data/precios.csv', dtype={'Precio': float})
+# data_vehiculos = pd.read_sql_table('autos', my_conn)
+# data_precios = pd.read_sql_table('precios', my_conn)
+# data_criterios = pd.read_sql_table('criterios', my_conn)
 
 # Fusiona los precios con la base de datos de vehículos.
 data = agrega_precios(data_vehiculos, data_precios)
