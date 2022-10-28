@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from functions import agrega_precios
 from functions import define_interfaz
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
 
 # Definición de los controles de la barra lateral
 level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
