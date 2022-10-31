@@ -4,7 +4,7 @@ from classes import Vehiculo
 # Creamos la función de la matriz de decision para usuarios novatos
 def matriz_decision_novato(dataframe, potencia, consumo, seguridad):
     dataframe['Puntuacion'] = (dataframe['C'] * (1 - consumo) + 10) + (dataframe['P'] * potencia + 10) + \
-                                (dataframe['S'] * seguridad))
+                                (dataframe['S'] * seguridad)
     return dataframe
 
 # Creamos la función de la matriz de decision para usuarios expertos
