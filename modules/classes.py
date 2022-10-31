@@ -1,4 +1,3 @@
-from types import NoneType
 from typing_extensions import Self
 import streamlit as st
 

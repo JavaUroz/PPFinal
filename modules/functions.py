@@ -1,5 +1,5 @@
+from classes import Camioneta, Auto_Suv
 import streamlit as st
-from modules.classes import Auto_Suv, Camioneta
 
 # Creamos la función de la matriz de decision para usuarios novatos
 def matriz_decision_novato(dataframe, potencia, consumo, seguridad):
@@ -30,7 +30,7 @@ def explora_camioneta(version, data):
 
 # Creamos la función que presenta la interfaz
 def define_interfaz(level_user, data):
-    if level_user == 'Novato':
+    if level_user is 'Novato':
         interfaz_novato(data)
     else:
         interfaz_experto(data)
