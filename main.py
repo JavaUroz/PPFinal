@@ -21,9 +21,6 @@ criterios = pd.read_sql_table('criterios', my_conn)
 # Fusiona los precios con la base de datos de vehículos.
 data = agrega_tablas(vehiculos, precios)
 
-# Fusiona los precios con la base de datos de vehículos.
-data = agrega_tablas(vehiculos, criterios)
-
 # Definición del panel central
 st.header('Sistema de apoyo para la elección de vehículos')
 define_interfaz(level_user, data)
