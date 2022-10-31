@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-from functions import agrega_precios
-from functions import define_interfaz
+from modules.functions import agrega_precios
+from modules.functions import define_interfaz
 # from sqlalchemy import create_engine
 
 # Definición de los controles de la barra lateral
