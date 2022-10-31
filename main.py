@@ -9,7 +9,7 @@ from modules.functions import define_interfaz
 level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
 
 # Conexión con SQLAlchemy
-path = './data/'
+path = 'data/'
 database = 'DSS-Autos.db'
 my_conn=create_engine('sqlite:///'+path+database)
 
