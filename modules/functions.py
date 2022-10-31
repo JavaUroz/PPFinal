@@ -43,7 +43,7 @@ def interfaz_novato(data):
     select_seguridad = st.sidebar.slider('Seguridad', 1, 5)
     # Habilita las opciones de filtrado
     with st.expander('Seleccione los criterios de filtrado de su preferencia'):
-        col1, col2 = st.columns(2)
+        col1 = st.columns(2)
         marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
         if marca == []:
             col1.error('Elija al menos una marca de vehículo')
@@ -105,6 +105,9 @@ def interfaz_experto(data):
                 col1.caption('Combustible: '+explorer.get_combustible().values[0])
                 col2.caption('Tracción: '+explorer.get_traccion().values[0])
                 col3.caption('Cabina: '+explorer.get_cabina().values[0])
+                col1, col2 = st.columns(2)
+                col1.caption('Tipo: '+explorer.get_tipo().values[0])
+                col2.caption('Potencia: '+explorer.get_potencia().values[0])
             else:
                 explorer = explora_camioneta(vehiculo, data)
                 col1, col2 = st.columns(2)
@@ -114,6 +117,9 @@ def interfaz_experto(data):
                 col1, col2, col3=st.columns(3)
                 col1.caption('Combustible: '+explorer.get_combustible().values[0])
                 col2.caption('Tracción: '+explorer.get_traccion().values[0])
+                col1, col2 = st.columns(2)
+                col1.caption('Tipo: '+explorer.get_tipo().values[0])
+                col2.caption('Potencia: '+explorer.get_potencia().values[0])
 
 
 
