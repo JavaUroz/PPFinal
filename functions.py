@@ -1,5 +1,5 @@
 import streamlit as st
-from classes import Vehiculo
+from classes import Auto_Suv, Camioneta
 
 # Creamos la función de la matriz de decision para usuarios novatos
 def matriz_decision_novato(dataframe, potencia, consumo, seguridad):
@@ -20,12 +20,12 @@ def agrega_precios(dataframe1, dataframe2):
 
 def explora_auto_SUV(version, data):
     vehicle = data[data['Version']==version]
-    explorer = Vehiculo(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Traccion)
+    explorer = Auto_Suv(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Traccion)
     return explorer
 
 def explora_camioneta(version, data):
     vehicle = data[data['Version']==version]
-    explorer = Vehiculo(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Cabina, vehicle.Traccion)
+    explorer = Camioneta(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Cabina, vehicle.Traccion)
     return explorer
 
 # Creamos la función que presenta la interfaz
