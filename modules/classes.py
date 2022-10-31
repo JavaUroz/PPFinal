@@ -28,6 +28,9 @@ class Vehiculo(object):
   def get_combustible(self):
       return self.motor_combustible
 
+  def get_potencia(self):
+      return self.motor_potencia
+
   def get_traccion(self):
       return self.traccion
 
