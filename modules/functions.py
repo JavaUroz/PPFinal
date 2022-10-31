@@ -14,7 +14,7 @@ def matriz_decision_experto(dataframe, potencia, consumo, seguridad, confort):
     return dataframe
 
 # Creamos la función que agrega los precios
-def agrega_precios(dataframe1, dataframe2):
+def agrega_tablas(dataframe1, dataframe2):
     merge = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
     return merge
 
