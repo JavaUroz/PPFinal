@@ -43,16 +43,19 @@ def interfaz_novato(data):
     # Habilita las opciones de filtrado
     with st.expander('Seleccione los criterios de filtrado de su preferencia'):
         col1, col2 = st.columns(2)
-        marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
+        marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
         if marca == []:
             col1.error('Elija al menos una marca de vehículo')
+        tipo = col2.multiselect('Tipo de carrocería', sorted(data['TipoVehiculo'].unique().tolist()))
+        if tipo == []:
+            col1.error('Elija al menos un tipo de carrocería')
         precio_max = col1.slider('Precio en miles de pesos', 0, 10000)
     # Aplica las opciones de filtrado
     filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
     ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
     # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
-    if marca == [] or precio_max == 0:
+    if marca == [] or tipo == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
@@ -105,8 +108,8 @@ def interfaz_experto(data):
             col1, col2, col3=st.columns(3)
             col1.caption('Combustible: '+explorer.get_combustible().values[0])
             col2.caption('Tracción: '+explorer.get_traccion().values[0])
-            if explorer.tipo == 'Camioneta':
-                col3.caption('Cabina: '+explorer.get_cabina().values[0])
+            # if explorer.tipo == 'Camioneta':
+            #     col3.caption('Cabina: '+explorer.get_cabina().values[0])
 
 # from classes import Camioneta, Auto_Suv
 # import streamlit as st
