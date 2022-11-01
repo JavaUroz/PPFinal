@@ -1,5 +1,5 @@
 import streamlit as st
-from classes import Vehiculo
+from classes import AutoSuv, Camioneta
 
 # Creamos la función de la matriz de decision para usuarios novatos
 def matriz_decision_novato(dataframe, a, b, c):
@@ -20,8 +20,10 @@ def agrega_precios(dataframe1, dataframe2):
 
 def explora_vehiculo(version, data):
     vehicle = data[data['Version']==version]
-
-    explorer = Vehiculo(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Cabina, vehicle.Traccion)
+    if vehicle.tipoVehiculo == 'Camioneta':
+        explorer = Camioneta(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Cabina, vehicle.Traccion)
+    else:
+        explorer = AutoSuv(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Traccion)
     return explorer
 
 
@@ -103,7 +105,8 @@ def interfaz_experto(data):
             col1, col2, col3=st.columns(3)
             col1.caption('Combustible: '+explorer.get_combustible().values[0])
             col2.caption('Tracción: '+explorer.get_traccion().values[0])
-            col3.caption('Cabina: '+explorer.get_cabina().values[0])
+            if explorer.tipo == 'Camioneta':
+                col3.caption('Cabina: '+explorer.get_cabina().values[0])
 
 # from classes import Camioneta, Auto_Suv
 # import streamlit as st
