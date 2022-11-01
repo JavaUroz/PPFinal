@@ -8,11 +8,13 @@ def matriz_decision_novato(dataframe, a, b, c):
     return dataframe
 
 # Creamos la función de la matriz de decision para usuarios expertos
-def matriz_decision_experto(dataframe):
-    pass
-
+def matriz_decision_experto(dataframe, a, b, c, d):
+    dataframe['Puntuacion'] = (dataframe['C'] * (1 - a) + 10) + \
+                              (dataframe['P'] * b + 10) + (dataframe['S'] * c) + \
+                              (dataframe['C.1'] * (1 - d))
+    return dataframe
 # Creamos la función que agrega los precios
-def agrega_precios(dataframe1, dataframe2):
+def agrega_tablas(dataframe1, dataframe2):
     merge = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
     return merge
 
@@ -63,6 +65,7 @@ def interfaz_experto(data):
     select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia=st.sidebar.slider('Potencia', 1, 5)
     select_seguridad=st.sidebar.slider('Seguridad', 1, 5)
+    select_confort=st.sidebar.slider('Confort', 1, 5)
     # Habilita las opciones de filtrado
     with st.expander('Seleccione los criterios de filtrado de su preferencia'):
         col1, col2=st.columns(2)
@@ -82,7 +85,7 @@ def interfaz_experto(data):
     # Aplica las opciones de filtrado
     filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Combustible'].isin(combustible))]
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
-    ponderacion=matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
+    ponderacion=matriz_decision_experto(filtrado, select_consumo, select_potencia, select_seguridad, select_confort)
     # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
     if marca == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
