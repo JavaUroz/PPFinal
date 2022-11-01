@@ -93,6 +93,7 @@ def interfaz_experto(data):
         st.subheader('Elige el vehículo que deseas explorar')
         vehiculo = st.radio('Versiones', ponderacion.loc[:,'Version'])
         if st.button('Explorar'):
+            explorer.head()
             explorer = explora_vehiculo(vehiculo, data)
             col1, col2 = st.columns(2)
             col1.subheader('Marca: '+explorer.get_marca().values[0])
