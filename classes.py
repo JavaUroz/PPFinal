@@ -5,6 +5,7 @@ class Vehiculo:
     self.marca = marca
     self.modelo = modelo
     self.version = version
+    self.tipo = tipo
     self.motor_combustible = combustible
     self.motor_potencia = potencia
     self.transmision = transmision
@@ -22,6 +23,9 @@ class Vehiculo:
 
   def get_combustible(self):
       return self.motor_combustible
+
+  def get_tipo(self):
+      return self.tipo
 
   def get_traccion(self):
       return self.traccion
