@@ -9,7 +9,7 @@ class Vehiculo:
     self.motor_combustible = combustible
     self.motor_potencia = potencia
     self.transmision = transmision
-    self.cabina = cabina
+#    self.cabina = cabina
     self.traccion = traccion
 
   def get_marca(self):
@@ -30,8 +30,8 @@ class Vehiculo:
   def get_traccion(self):
       return self.traccion
 
-  def get_cabina(self):
-    return self.cabina
+#   def get_cabina(self):
+#     return self.cabina
 
 
 

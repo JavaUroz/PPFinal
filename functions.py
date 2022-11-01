@@ -20,6 +20,7 @@ def agrega_precios(dataframe1, dataframe2):
 
 def explora_vehiculo(version, data):
     vehicle = data[data['Version']==version]
+
     explorer = Vehiculo(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Cabina, vehicle.Traccion)
     return explorer
 
@@ -72,7 +73,7 @@ def interfaz_experto(data):
         marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
         if marca == []:
             col1.error('Elija al menos una marca de vehículo')
-        tipo = col1.multiselect('Tipo de vehísulo',sorted(data['TipoVehiculo'].unique().tolist()))
+        tipo = col1.multiselect('Tipo de vehículo',sorted(data['TipoVehiculo'].unique().tolist()))
         if tipo == []:
             col1.error('Elija al menos un tipo de vehículo')
         transmision = col2.multiselect('Transmisión',['Manual','Automática'])
@@ -93,9 +94,8 @@ def interfaz_experto(data):
         st.subheader('Elige el vehículo que deseas explorar')
         vehiculo = st.radio('Versiones', ponderacion.loc[:,'Version'])
         if st.button('Explorar'):
-            
             explorer = explora_vehiculo(vehiculo, data)
-            explorer.head()
+            data.head()          
             col1, col2 = st.columns(2)
             col1.subheader('Marca: '+explorer.get_marca().values[0])
             col2.subheader('Modelo: '+explorer.get_modelo().values[0])
@@ -103,7 +103,7 @@ def interfaz_experto(data):
             col1, col2, col3=st.columns(3)
             col1.caption('Combustible: '+explorer.get_combustible().values[0])
             col2.caption('Tracción: '+explorer.get_traccion().values[0])
-            #col3.caption('Cabina: '+explorer.get_cabina().values[0])
+            col3.caption('Cabina: '+explorer.get_cabina().values[0])
 
 # from classes import Camioneta, Auto_Suv
 # import streamlit as st
