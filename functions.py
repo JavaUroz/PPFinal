@@ -2,7 +2,7 @@ import streamlit as st
 from classes import AutoSuv, Camioneta
 
 # Creamos el panel de determinacion de nivel de usuario
-def interfaz_nivel_seleccion():
+def interfaz_nivel_seleccion(data):
     # Creamos los componentes
     st.title('Sistema de apoyo para la elección de vehículos')
     st.header('Conteste estas preguntas para definir su perfil')
@@ -29,8 +29,9 @@ def interfaz_nivel_seleccion():
         level_user = 'Experto'
     elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):    
         level_user = 'Novato'
+    if st.button('Comprobar nivel'):
+        define_interfaz(level_user, data)
     return level_user
-
 
 # Creamos la función de la matriz de decision para usuarios novatos
 def matriz_decision_novato(dataframe, a, b, c):

@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine
 from functions import agrega_tablas
-from functions import define_interfaz
+#from functions import define_interfaz
 from functions import interfaz_nivel_seleccion
 
 
@@ -23,5 +23,4 @@ criterios = pd.read_sql_table('criterios', my_conn)
 data = agrega_tablas(vehiculos, precios)
 
 # Definición del panel central
-if st.button('Comprobar nivel'):
-        define_interfaz(interfaz_nivel_seleccion(), data)
+interfaz_nivel_seleccion(data)
