@@ -35,9 +35,8 @@ def define_interfaz(level_user, data):
         interfaz_experto(data)
 
 def interfaz_novato(data):
-    # Opciones de interfaz para usuarios novatos
-    st.subheader('Usuario Novato')
-    st.sidebar.caption('Seleccione sus preferencias generales')
+    # Opciones de interfaz para usuarios novatos    
+    st.sidebar.caption('Seleccione sus preferencias generales para usuario NOVATO (default)')
     select_consumo = st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia = st.sidebar.slider('Potencia', 1, 5)
     select_seguridad = st.sidebar.slider('Seguridad', 1, 5)
@@ -74,7 +73,7 @@ def interfaz_experto(data):
     select_seguridad=st.sidebar.slider('Seguridad', 1, 5)
     select_confort=st.sidebar.slider('Confort', 1, 5)
     # Habilita las opciones de filtrado
-    with st.expander('Seleccione los criterios de filtrado de su preferencia'):
+    with st.expander('Seleccione los criterios de filtrado de su preferencia para usuario EXPERTO'):
         col1, col2=st.columns(2)
         marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
         if marca == []:
