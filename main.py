@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from functions import *
 
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
-
+level_user=None
 # # Conexión con SQLAlchemy
 path = 'data/'
 database = 'DSS-Autos.db'
