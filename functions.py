@@ -26,7 +26,6 @@ def explora_vehiculo(version, data):
         explorer = AutoSuv(vehicle.Marca, vehicle.Modelo, vehicle.Version, vehicle.TipoVehiculo, vehicle.Combustible, vehicle.Potencia, vehicle.Transmisión, vehicle.Traccion)
     return explorer
 
-
 # Creamos la función que presenta la interfaz
 def define_interfaz(level_user, data):
     if level_user == 'Novato':
@@ -68,7 +67,7 @@ def interfaz_novato(data):
 def interfaz_experto(data):
     # Opciones de interfaz para usuarios expertos
     st.markdown('**USUARIO EXPERTO**')
-    st.sidebar.caption('Seleccione sus preferencias generales')
+    st.sidebar.caption('Seleccione los criterios de filtrado de su preferencia')
     select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia=st.sidebar.slider('Potencia', 1, 5)
     select_seguridad=st.sidebar.slider('Seguridad', 1, 5)
