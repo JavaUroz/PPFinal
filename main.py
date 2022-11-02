@@ -5,7 +5,8 @@ from functions import agrega_tablas
 from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
-nivel = st.sidebar.slider('Conocimiento sobre mecanica', 1, 5)
+col1 = st.columns(1)
+potencia = col1.multiselect('Unidades de potencia de un vehiculo', ['HP', 'CV', 'WAT']) 
 
 
 
