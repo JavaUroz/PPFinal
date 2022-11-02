@@ -1,8 +1,5 @@
 import streamlit as st
 import pandas as pd
-from sqlalchemy import create_engine
-from functions import agrega_tablas
-from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
 st.title('Sistema de apoyo para la elección de vehículos')
@@ -33,9 +30,11 @@ else:
     st.empty()
     level_user = 'Novato'
 
+from sqlalchemy import create_engine
+from functions import agrega_tablas
+from functions import define_interfaz
 
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
-
 
 # # Conexión con SQLAlchemy
 path = 'data/'
