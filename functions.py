@@ -91,7 +91,7 @@ def interfaz_experto(data):
             col2.error('Elija al menos un tipo de combustible')
         precio_max=st.slider('Precio en miles de pesos', 0, 30000)
     # Aplica las opciones de filtrado
-    if tipo == 'Camioneta':
+    if tipo != 'Camioneta':
         filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Combustible'].isin(combustible))]
     else:
         filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Cabina'].isin(cabina)) & (data['Combustible'].isin(combustible))]        
