@@ -31,8 +31,10 @@ def explora_vehiculo(version, data):
 def define_interfaz(level_user, data):
     if level_user == 'Novato':
         interfaz_novato(data)
-    else:
+    elif level_user == 'Experto':
         interfaz_experto(data)
+    else:
+        pass
 
 def interfaz_novato(data):
     # Opciones de interfaz para usuarios novatos    
