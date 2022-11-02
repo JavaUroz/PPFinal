@@ -24,7 +24,7 @@ electricidad = col2.checkbox('Electricidad')
 querosene = col2.checkbox('Querosene')
 st.markdown('Cual es su conocimiento general sobre vehiculos?')
 conocimiento = st.slider('Nivel de conocimiento', 1 , 10)
-# Elegimos criterios para definir usuario    
+# Elegimos criterios para definir usuario   
 if (cv and fp and nafta and gasoil and conocimiento > 6):    
     level_user = 'Experto'
 elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):    
