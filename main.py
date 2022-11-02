@@ -5,7 +5,16 @@ from functions import agrega_tablas
 from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
-level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
+nivel = st.sidebar.slider('Conocimiento sobre mecanica', 1, 5)
+
+
+
+
+# level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
+
+
+
+
 
 # # Conexión con SQLAlchemy
 path = 'data/'
