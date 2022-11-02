@@ -5,8 +5,11 @@ from functions import agrega_tablas
 from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
-col1 = st.columns(1)
-preguntas = st.checkbox('Unidades de potencia de un vehiculo', ['HP', 'CV', 'WAT']) 
+st.header('Conteste estas preguntas para definir su perfil')
+st.subheader('Cual es la unidad de medida de la potencio de un vehiculo?')
+hp = st.checkbox('HP')
+wt = st.checkbox('WAT')
+cv = st.checkbox('CV')
 
 
 
