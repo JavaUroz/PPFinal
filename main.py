@@ -26,6 +26,7 @@ querosene = col2.checkbox('Querosene')
 st.markdown('Cual es su conocimiento general sobre vehiculos?')
 conocimiento = st.slider('Nivel de conocimiento', 1 , 10)
 
+
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
 
 # # Conexión con SQLAlchemy
@@ -49,4 +50,6 @@ if (cv and fp and nafta and gasoil and conocimiento > 6):
 elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):
     st.empty()
     level_user = 'Novato'
-define_interfaz(level_user, data)
+
+if st.button('Comprobar nivel'):
+    define_interfaz(level_user, data)
