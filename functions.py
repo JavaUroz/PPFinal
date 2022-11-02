@@ -59,7 +59,7 @@ def interfaz_novato(data):
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
-        st._arrow_table(
+        st.table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
         )
@@ -97,11 +97,11 @@ def interfaz_experto(data):
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
-        resultado = st.table(
+        st.table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
-        )
-        resultado()
+        ).color_picker('red')
+        
         # def highlight_survived(tabla):
         #     return ['background-color: green']*len(tabla) if tabla.index[0] else ['background-color: green']*len(tabla)
         # highlight_survived(tabla)
