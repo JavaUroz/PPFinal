@@ -8,7 +8,8 @@ from functions import define_interfaz
 st.title('Sistema de apoyo para la elección de vehículos')
 
 st.header('Conteste estas preguntas para definir su perfil')
-st.subheader('Cual es la unidad de medida de la potencia de un vehiculo?')
+
+#st.subheader('Cuál es la unidad de medida de la potencia de un vehículo?')
 hp = st.checkbox('HP')
 wt = st.checkbox('WAT')
 cv = st.checkbox('CV')
@@ -34,9 +35,6 @@ else:
 
 
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
-
-
-
 
 
 # # Conexión con SQLAlchemy
