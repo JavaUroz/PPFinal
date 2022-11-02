@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from classes import AutoSuv, Camioneta
 
 # Creamos la función de la matriz de decision para usuarios novatos
@@ -63,6 +64,7 @@ def interfaz_novato(data):
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
         )
+    st.dataframe(ponderacion).style.highlight_max(axis=0)
 
 
 def interfaz_experto(data):
@@ -99,13 +101,20 @@ def interfaz_experto(data):
         st.subheader('Listado de vehiculos recomendados')
         st.table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
-                                                                                               ascending=False),
+                                                                                               ascending=False,)
         )
         
-        # def highlight_survived(tabla):
-        #     return ['background-color: green']*len(tabla) if tabla.index[0] else ['background-color: green']*len(tabla)
-        # highlight_survived(tabla)
-        # tabla()
+# df = pd.read_csv("data/titanic.csv")
+
+def highlight_survived(s):
+    return ['background-color: green']*len(s) if s.Survived else ['background-color: red']*len(s)
+
+# def color_survived(val):
+#     color = 'green' if val else 'red'
+#     return f'background-color: {color}'
+
+# st.dataframe(df.style.apply(highlight_survived, axis=1))
+# st.dataframe(df.style.applymap(color_survived, subset=['Survived']))
 
 
     # if marca == [] or precio_max == 0:
