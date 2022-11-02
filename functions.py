@@ -1,5 +1,7 @@
 import streamlit as st
+
 from classes import AutoSuv, Camioneta
+
 
 # Creamos la función de la matriz de decision para usuarios novatos
 def matriz_decision_novato(dataframe, a, b, c):

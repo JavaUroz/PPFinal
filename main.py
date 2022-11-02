@@ -4,6 +4,8 @@ from sqlalchemy import create_engine
 from functions import agrega_tablas
 from functions import define_interfaz
 
+level_user = None
+
 st.title('Sistema de apoyo para la elección de vehículos')
 st.header('Conteste estas preguntas para definir su perfil')
 st.markdown('Cuál es la unidad de medida de la potencia de un vehículo?')
