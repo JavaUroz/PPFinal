@@ -14,8 +14,9 @@ def matriz_decision_experto(dataframe, a, b, c, d):
                               (dataframe['C.1'] * (1 - d))
     return dataframe
 # Creamos la función que agrega los precios
-def agrega_tablas(dataframe1, dataframe2):
+def agrega_tablas(dataframe1, dataframe2, dataframe3):
     merge = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
+    merge = dataframe1.merge(dataframe3, left_on='Version', right_on='Version')
     return merge
 
 def explora_vehiculo(version, data):
@@ -59,7 +60,7 @@ def interfaz_novato(data):
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
-        st.table(
+        st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
         )
