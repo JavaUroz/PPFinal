@@ -6,10 +6,23 @@ from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
 st.header('Conteste estas preguntas para definir su perfil')
-st.subheader('Cual es la unidad de medida de la potencio de un vehiculo?')
+st.subheader('Cual es la unidad de medida de la potencia de un vehiculo?')
 hp = st.checkbox('HP')
 wt = st.checkbox('WAT')
 cv = st.checkbox('CV')
+st.subheader('Que es el torque del motor?')
+fe = st.checkbox('Es la fuerza de explosion del motor')
+fp = st.checkbox('Es la fuerza aplicada en una palanca')
+fs = st.checkbox('Es la fuerza aplicada a una superficie')
+st.subheader('Cuales son las opciones de alimentacion mas conocidas en el pais?')
+col1, col2=st.columns(2)
+gasolina = col1.checkbox('Gasolina')
+gasoil = col1.checkbox('Gasoil')
+biodiesel = col1.checkbox('Biodiesel')
+nafta = col2.checkbox('Nafta')
+electricidad = col2.checkbox('Electricidad')
+querosene = col2.checkbox('Querosene')
+
 
 
 
