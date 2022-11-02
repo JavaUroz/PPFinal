@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from functions import *
 
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
-level_user=formulario_interfaz()
+#level_user = formulario_interfaz()
 # # Conexión con SQLAlchemy
 path = 'data/'
 database = 'DSS-Autos.db'
@@ -21,4 +21,4 @@ data = agrega_tablas(vehiculos, precios)
 # Definición del panel central
 
 # Formulario que define la interfaz como parametro
-define_interfaz(level_user, data)
+define_interfaz(formulario_interfaz(), data)
