@@ -36,6 +36,7 @@ def define_interfaz(level_user, data):
 
 def interfaz_novato(data):
     # Opciones de interfaz para usuarios novatos
+    st.subheader = 'Usuario Novato'
     st.sidebar.caption('Seleccione sus preferencias generales')
     select_consumo = st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia = st.sidebar.slider('Potencia', 1, 5)
@@ -66,6 +67,7 @@ def interfaz_novato(data):
 
 def interfaz_experto(data):
     # Opciones de interfaz para usuarios expertos
+    st.subheader = 'Usuario Experto'
     st.sidebar.caption('Seleccione sus preferencias generales')
     select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia=st.sidebar.slider('Potencia', 1, 5)
