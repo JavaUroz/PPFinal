@@ -99,17 +99,24 @@ def interfaz_experto(data):
         st.subheader('Elige el vehículo que deseas explorar')
         vehiculo = st.radio('Versiones', ponderacion.loc[:,'Version'])
         if st.button('Explorar'):
-            explorer = explora_vehiculo(vehiculo, data)
-            data.head()          
-            col1, col2 = st.columns(2)
-            col1.subheader('Marca: '+explorer.get_marca().values[0])
-            col2.subheader('Modelo: '+explorer.get_modelo().values[0])
-            st.subheader('Versión: '+explorer.get_version().values[0])
-            col1, col2, col3=st.columns(3)
-            col1.caption('Combustible: '+explorer.get_combustible().values[0])
-            col2.caption('Tracción: '+explorer.get_traccion().values[0])
+            st._arrow_table(
+            ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion', ascending=False),)
+
+
+
+            # explorer = explora_vehiculo(vehiculo, data)
+            # data.head()          
+            # col1, col2 = st.columns(2)
+            # col1.subheader('Marca: '+explorer.get_marca().values[0])
+            # col2.subheader('Modelo: '+explorer.get_modelo().values[0])
+            # st.subheader('Versión: '+explorer.get_version().values[0])
+            # col1, col2, col3=st.columns(3)
+            # col1.caption('Combustible: '+explorer.get_combustible().values[0])
+            # col2.caption('Tracción: '+explorer.get_traccion().values[0])
             # if explorer.tipo == 'Camioneta':
             #     col3.caption('Cabina: '+explorer.get_cabina().values[0])
+
+
 
 # from classes import Camioneta, Auto_Suv
 # import streamlit as st
