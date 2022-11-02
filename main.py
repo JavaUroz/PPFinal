@@ -42,11 +42,10 @@ criterios = pd.read_sql_table('criterios', my_conn)
 data = agrega_tablas(vehiculos, precios)
 
 # Definición del panel central
-level_user = None
 if (cv and fp and nafta and gasoil and conocimiento > 6):
     st.empty()
     level_user = 'Experto'
-else:
+elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):
     st.empty()
     level_user = 'Novato'
 define_interfaz(level_user, data)
