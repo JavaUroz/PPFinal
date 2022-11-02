@@ -93,18 +93,31 @@ def interfaz_experto(data):
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
     ponderacion=matriz_decision_experto(filtrado, select_consumo, select_potencia, select_seguridad, select_confort)
     # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
-    if marca == [] or precio_max == 0:
+    # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
+    if marca == [] or tipo == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
-        st.subheader('Elige el vehículo que deseas explorar')
-        vehiculo = st.radio('Versiones', ponderacion.loc[:,'Version'])
-        if st.button('Explorar'):
-            st._arrow_table(
-            ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion', ascending=False),)
+        st.subheader('Listado de vehiculos recomendados')
+        st._arrow_table(
+        ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
+                                                                                               ascending=False),
+        )
 
 
 
-            # explorer = explora_vehiculo(vehiculo, data)
+    # if marca == [] or precio_max == 0:
+    #     st.warning('Elija sus preferencias para ver las recomendaciones')
+    # else:
+    #     st.subheader('Elige el vehículo que deseas explorar')
+    #     vehiculo = st.radio('Versiones', ponderacion.loc[:,'Version'])
+    #     explorer = explora_vehiculo(vehiculo, data)
+    #     if st.button('Explorar'):
+    #         st._arrow_table(
+    #         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion', ascending=False),)
+
+
+
+            
             # data.head()          
             # col1, col2 = st.columns(2)
             # col1.subheader('Marca: '+explorer.get_marca().values[0])
