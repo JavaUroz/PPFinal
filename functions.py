@@ -58,7 +58,7 @@ def interfaz_novato(data):
     if marca == [] or tipo == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
-        st.subheader('Listado de vehiculos recomendados')
+        st.markdown('Listado de vehiculos recomendados')
         st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
@@ -96,7 +96,7 @@ def interfaz_experto(data):
     if marca == [] or tipo == [] or transmision == [] or combustible == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
-        st.subheader('Listado de vehiculos recomendados')        
+        st.markdown('Listado de vehiculos recomendados')        
         st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
