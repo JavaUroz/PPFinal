@@ -93,8 +93,7 @@ def interfaz_experto(data):
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
     ponderacion=matriz_decision_experto(filtrado, select_consumo, select_potencia, select_seguridad, select_confort)
     # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
-    # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
-    if marca == [] or tipo == [] or precio_max == 0:
+    if marca == [] or tipo == [] or transmision == [] or combustible == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
