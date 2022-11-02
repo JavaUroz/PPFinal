@@ -98,5 +98,5 @@ def interfaz_experto(data):
         st.subheader('Listado de vehiculos recomendados')        
         st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
-                                                                                               ascending=False,)
+                                                                                               ascending=False),
         )
