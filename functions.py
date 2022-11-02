@@ -100,7 +100,7 @@ def interfaz_experto(data):
         st.table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
-        ).color_picker('red')
+        )
         
         # def highlight_survived(tabla):
         #     return ['background-color: green']*len(tabla) if tabla.index[0] else ['background-color: green']*len(tabla)
