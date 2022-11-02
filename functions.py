@@ -61,7 +61,6 @@ def explora_vehiculo(version, data):
 
 # Creamos la función que presenta la interfaz
 def define_interfaz(level_user, data):    
-    level_user = formulario_interfaz()
     if level_user == 'Novato':
         interfaz_novato(data)
     elif level_user == 'Experto':
