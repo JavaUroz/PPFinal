@@ -5,7 +5,7 @@ from functions import agrega_tablas
 from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
-st.header('Sistema de apoyo para la elección de vehículos')
+st.title('Sistema de apoyo para la elección de vehículos')
 
 st.header('Conteste estas preguntas para definir su perfil')
 st.subheader('Cual es la unidad de medida de la potencia de un vehiculo?')
