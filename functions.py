@@ -33,8 +33,6 @@ def define_interfaz(level_user, data):
         interfaz_novato(data)
     elif level_user == 'Experto':
         interfaz_experto(data)
-    else:
-        pass
 
 def interfaz_novato(data):
     # Opciones de interfaz para usuarios novatos    
