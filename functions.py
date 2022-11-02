@@ -81,8 +81,6 @@ def interfaz_experto(data):
         tipo = col1.multiselect('Tipo de vehículo',sorted(data['TipoVehiculo'].unique().tolist()))
         if tipo == []:
             col1.error('Elija al menos un tipo de vehículo')
-            if tipo == 'Camioneta':
-                cabina = col1.multiselect('Tipo de cabina', sorted(data['Cabina'].unique().tolist()))
         transmision = col2.multiselect('Transmisión',['Manual','Automática'])
         if transmision == []:
             col2.error('Elija al menos un tipo de transmisón')
@@ -91,10 +89,7 @@ def interfaz_experto(data):
             col2.error('Elija al menos un tipo de combustible')
         precio_max=st.slider('Precio en miles de pesos', 0, 30000)
     # Aplica las opciones de filtrado
-    if tipo != 'Camioneta':
-        filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Combustible'].isin(combustible))]
-    else:
-        filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Cabina'].isin(cabina)) & (data['Combustible'].isin(combustible))]        
+    filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Combustible'].isin(combustible))]        
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
     ponderacion=matriz_decision_experto(filtrado, select_consumo, select_potencia, select_seguridad, select_confort)
     # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
@@ -102,11 +97,14 @@ def interfaz_experto(data):
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
-        st._arrow_table(
+        tabla = st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False),
         )
-
+        def highlight_survived(tabla):
+            return ['background-color: green']*len(tabla) if tabla.index[0] else ['background-color: green']*len(tabla)
+        highlight_survived(tabla)
+        tabla()
 
 
     # if marca == [] or precio_max == 0:
