@@ -4,31 +4,34 @@ from classes import AutoSuv, Camioneta
 
 def formulario_interfaz():
     level_user = None
-    st.title('Sistema de apoyo para la elección de vehículos')
-    st.header('Conteste estas preguntas para definir su perfil')
-    st.markdown('Cuál es la unidad de medida de la potencia de un vehículo?')
-    hp = st.checkbox('HP')
-    wt = st.checkbox('WAT')
-    cv = st.checkbox('CV')
-    st.markdown('Que es el torque del motor?')
-    fe = st.checkbox('Es la fuerza de explosion del motor')
-    fp = st.checkbox('Es la fuerza aplicada en una palanca')
-    fs = st.checkbox('Es la fuerza aplicada a una superficie')
-    st.markdown('Cuales son las opciones de alimentacion mas conocidas en el pais?')
-    col1, col2=st.columns(2)
-    gasolina = col1.checkbox('Gasolina')
-    gasoil = col1.checkbox('Gasoil')
-    biodiesel = col1.checkbox('Biodiesel')
-    nafta = col2.checkbox('Nafta')
-    electricidad = col2.checkbox('Electricidad')
-    querosene = col2.checkbox('Querosene')
-    st.markdown('Cual es su conocimiento general sobre vehiculos?')
-    conocimiento = st.slider('Nivel de conocimiento', 1 , 10)
-    # Elegimos criterios para definir usuario   
-    if (cv and fp and nafta and gasoil and conocimiento > 6):    
-        level_user = 'Experto'
-    elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):    
-        level_user = 'Novato'
+    with st.form("form_interfaz"):
+        st.title('Sistema de apoyo para la elección de vehículos')
+        st.header('Conteste estas preguntas para definir su perfil')
+        st.markdown('Cuál es la unidad de medida de la potencia de un vehículo?')
+        hp = st.checkbox('HP')
+        wt = st.checkbox('WAT')
+        cv = st.checkbox('CV')
+        st.markdown('Que es el torque del motor?')
+        fe = st.checkbox('Es la fuerza de explosion del motor')
+        fp = st.checkbox('Es la fuerza aplicada en una palanca')
+        fs = st.checkbox('Es la fuerza aplicada a una superficie')
+        st.markdown('Cuales son las opciones de alimentacion mas conocidas en el pais?')
+        col1, col2=st.columns(2)
+        gasolina = col1.checkbox('Gasolina')
+        gasoil = col1.checkbox('Gasoil')
+        biodiesel = col1.checkbox('Biodiesel')
+        nafta = col2.checkbox('Nafta')
+        electricidad = col2.checkbox('Electricidad')
+        querosene = col2.checkbox('Querosene')
+        st.markdown('Cual es su conocimiento general sobre vehiculos?')
+        conocimiento = st.slider('Nivel de conocimiento', 1 , 10)
+        # Elegimos criterios para definir usuario 
+        submitted = st.form_submit_button("Definir Interfaz")
+        if submitted:
+            if (cv and fp and nafta and gasoil and conocimiento > 6):    
+                level_user = 'Experto'
+            elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):    
+                level_user = 'Novato'
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
