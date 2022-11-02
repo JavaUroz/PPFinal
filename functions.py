@@ -49,7 +49,7 @@ def interfaz_novato(data):
         tipo = col2.multiselect('Tipo de carrocería', sorted(data['TipoVehiculo'].unique().tolist()))
         if tipo == []:
             col2.error('Elija al menos un tipo de carrocería')
-        precio_max = st.slider('Precio en miles de pesos', 0, 10000)
+        precio_max = st.slider('Precio en miles de pesos', 0, 30000)
     # Aplica las opciones de filtrado
     filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
@@ -87,7 +87,7 @@ def interfaz_experto(data):
         combustible = col2.multiselect('Combustible', ['Nafta', 'Diesel', 'Híbrido'])
         if combustible == []:
             col2.error('Elija al menos un tipo de combustible')
-        precio_max=st.slider('Precio en miles de pesos', 0, 15000)
+        precio_max=st.slider('Precio en miles de pesos', 0, 30000)
     # Aplica las opciones de filtrado
     filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Combustible'].isin(combustible))]
     # Aplica la matriz de decisión y la guarda en la variable ponderacion.
