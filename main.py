@@ -3,10 +3,6 @@ import pandas as pd
 from sqlalchemy import create_engine
 from functions import *
 
-level_user = None
-
-
-
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
 
 # # Conexión con SQLAlchemy
