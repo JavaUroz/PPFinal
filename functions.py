@@ -14,9 +14,8 @@ def matriz_decision_experto(dataframe, a, b, c, d):
                               (dataframe['C.1'] * (1 - d))
     return dataframe
 # Creamos la función que agrega los precios
-def agrega_tablas(dataframe1, dataframe2, dataframe3):
+def agrega_tablas(dataframe1, dataframe2):
     merge = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
-    merge = dataframe1.merge(dataframe3, left_on='Version', right_on='Version')
     return merge
 
 def explora_vehiculo(version, data):
