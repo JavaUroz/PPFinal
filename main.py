@@ -6,10 +6,8 @@ from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
 st.title('Sistema de apoyo para la elección de vehículos')
-
 st.header('Conteste estas preguntas para definir su perfil')
-
-#st.subheader('Cuál es la unidad de medida de la potencia de un vehículo?')
+st.subheader('Cuál es la unidad de medida de la potencia de un vehículo?')
 hp = st.checkbox('HP')
 wt = st.checkbox('WAT')
 cv = st.checkbox('CV')
@@ -29,8 +27,10 @@ st.subheader('Cual es su conocimiento general sobre vehiculos?')
 conocimiento = st.slider('Nivel de conocimiento', 1 , 10)
 
 if (cv and fp and nafta and gasoil and conocimiento > 6):
+    st.empty()
     level_user = 'Experto'
 else:
+    st.empty()
     level_user = 'Novato'
 
 
@@ -51,5 +51,4 @@ criterios = pd.read_sql_table('criterios', my_conn)
 data = agrega_tablas(vehiculos, precios)
 
 # Definición del panel central
-st.header('Sistema de apoyo para la elección de vehículos')
 define_interfaz(level_user, data)
