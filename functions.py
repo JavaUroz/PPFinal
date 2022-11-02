@@ -95,16 +95,7 @@ def interfaz_experto(data):
     if marca == [] or tipo == [] or transmision == [] or combustible == [] or precio_max == 0:
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
-        st.subheader('Listado de vehiculos recomendados')
-        # CSS to inject contained in a string
-        hide_table_row_index = """
-            <style>
-            thead tr th:first-child {display:none}
-            tbody th {display:none}
-            </style>
-            """
-        # Inject CSS with Markdown
-        st.markdown(hide_table_row_index, unsafe_allow_html=True)
+        st.subheader('Listado de vehiculos recomendados')        
         st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False,)
