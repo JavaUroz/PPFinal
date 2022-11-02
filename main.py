@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine
-from functions import agrega_precios
+from functions import agrega_tablas
 from functions import define_interfaz
 
 # Definición de los controles de la barra lateral
@@ -17,8 +17,11 @@ vehiculos = pd.read_sql_table('autos',my_conn)
 precios = pd.read_sql_table('precios',my_conn)
 criterios = pd.read_sql_table('criterios', my_conn)
 
-# Fusiona los precios con la base de datos de vehículos.
-data = agrega_precios(vehiculos, precios)
+# Fusiona las precios con la tabla de vehículos.
+data = agrega_tablas(vehiculos, precios)
+
+# Fusiona las criterios con la tabla de vehículos.
+data = agrega_tablas(vehiculos, criterios)
 
 # Definición del panel central
 st.header('Sistema de apoyo para la elección de vehículos')

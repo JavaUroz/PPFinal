@@ -14,7 +14,7 @@ def matriz_decision_experto(dataframe, a, b, c, d):
                               (dataframe['C.1'] * (1 - d))
     return dataframe
 # Creamos la función que agrega los precios
-def agrega_precios(dataframe1, dataframe2):
+def agrega_tablas(dataframe1, dataframe2):
     merge = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
     return merge
 
@@ -96,6 +96,15 @@ def interfaz_experto(data):
         st.warning('Elija sus preferencias para ver las recomendaciones')
     else:
         st.subheader('Listado de vehiculos recomendados')
+        # CSS to inject contained in a string
+        hide_table_row_index = """
+            <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
+            """
+        # Inject CSS with Markdown
+        st.markdown(hide_table_row_index, unsafe_allow_html=True)
         st._arrow_table(
         ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                ascending=False,)
