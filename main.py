@@ -25,7 +25,7 @@ querosene = col2.checkbox('Querosene')
 st.subheader('Cual es su conocimiento general sobre vehiculos?')
 conocimiento = st.slider('Nivel de conocimiento', 1 , 10)
 
-if (cv and fp and nafta and gasoil and conocimiento < 6):
+if (cv and fp and nafta and gasoil and conocimiento > 6):
     level_user = 'Experto'
 else:
     level_user = 'Novato'
