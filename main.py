@@ -24,5 +24,6 @@ data = agrega_tablas(vehiculos, precios)
 if level_user == None:
     formulario_interfaz()
     level_user = formulario_interfaz()
+    define_interfaz(level_user, data)
 else:    
     define_interfaz(level_user, data)
