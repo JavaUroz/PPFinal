@@ -4,7 +4,8 @@ from classes import AutoSuv, Camioneta
 
 def formulario_interfaz():
     level_user = None
-    with st.form("form_interfaz"):
+    placeholder = st.empty()
+    with placeholder.form("form_interfaz"):
         st.title('Sistema de apoyo para la elección de vehículos')
         st.header('Conteste estas preguntas para definir su perfil')
         st.markdown('Cuál es la unidad de medida de la potencia de un vehículo?')
@@ -32,6 +33,7 @@ def formulario_interfaz():
                 level_user = 'Experto'
             elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):    
                 level_user = 'Novato'
+            placeholder.empty()
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
