@@ -1,5 +1,23 @@
 import streamlit as st
+import pandas as pd
+from sqlalchemy import create_engine
 from classes import AutoSuv, Camioneta
+
+def conexion_datos():
+    # # Conexión con SQLAlchemy
+    path = 'data/'
+    database = 'DSS-Autos.db'
+    my_conn = create_engine('sqlite:///'+path+database)
+
+    # Carga los datos de la aplicación
+    vehiculos = pd.read_sql_table('autos',my_conn)
+    precios = pd.read_sql_table('precios',my_conn)
+    criterios = pd.read_sql_table('criterios', my_conn)
+
+    
+    # Fusiona los precios con la tabla de vehículos.
+    data = agrega_tablas(vehiculos, precios, criterios)
+    return data
 
 def formulario_interfaz():
     level_user = None      
@@ -48,8 +66,9 @@ def matriz_decision_experto(dataframe, a, b, c, d):
                               (dataframe['C.1'] * (1 - d))
     return dataframe
 # Creamos la función que agrega los precios
-def agrega_tablas(dataframe1, dataframe2):
-    merge = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
+def agrega_tablas(dataframe1, dataframe2, dataframe3):
+    merge1 = dataframe1.merge(dataframe2, left_on='Version', right_on='Version')
+    merge = merge1.merge(dataframe3, left_on='Version', right_on='Version')
     return merge
 
 def explora_vehiculo(version, data):
