@@ -19,7 +19,7 @@ criterios = pd.read_sql_table('criterios', my_conn)
 data = agrega_tablas(vehiculos, precios)
 
 # Definición del panel central
-
+level_user = ""
 # Formulario que define la interfaz como parametro
 if level_user == None:
     define_interfaz(formulario_interfaz(), data)
