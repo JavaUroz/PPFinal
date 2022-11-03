@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from functions import *
 
-#level_user = None
+level_user = None
 # level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
 level_user = formulario_interfaz()
 # # Conexión con SQLAlchemy
@@ -21,8 +21,8 @@ data = agrega_tablas(vehiculos, precios)
 
 # Formulario que define la interfaz como parametro
 
-if level_user != 'Novato' or level_user != 'Experto':
+if level_user == None:
     formulario_interfaz()
-elif level_user == 'Novato' or level_user == 'Experto':
     level_user = formulario_interfaz()
+else:    
     define_interfaz(level_user, data)
