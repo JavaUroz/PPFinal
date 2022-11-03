@@ -1,26 +1,11 @@
 from functions import *
 
-# level_user = st.sidebar.selectbox(label='Nivel de usuario', options=['Novato', 'Experto'])
-
-# # # Conexión con SQLAlchemy
-# path = 'data/'
-# database = 'DSS-Autos.db'
-# my_conn = create_engine('sqlite:///'+path+database)
-
-# # Carga los datos de la aplicación
-# vehiculos = pd.read_sql_table('autos',my_conn)
-# precios = pd.read_sql_table('precios',my_conn)
-# criterios = pd.read_sql_table('criterios', my_conn)
-
-# # Fusiona los precios con la tabla de vehículos.
-# data = agrega_tablas(vehiculos, precios)
-
+# Obtenemos datos en dataframe
 data = conexion_datos()
 
 # Formulario que define la interfaz como parametro
-#level_user = formulario_interfaz()
-define_interfaz('Novato', data)
-
+level_user = formulario_interfaz()
+define_interfaz(level_user, data)
 
 # if level_user == None:
 #     formulario_interfaz()
