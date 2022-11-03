@@ -18,8 +18,8 @@ from functions import *
 data = conexion_datos()
 
 # Formulario que define la interfaz como parametro
-level_user = formulario_interfaz()
-define_interfaz(level_user, data)
+#level_user = formulario_interfaz()
+define_interfaz('Novato', data)
 
 
 # if level_user == None:
