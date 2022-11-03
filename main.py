@@ -21,4 +21,9 @@ data = agrega_tablas(vehiculos, precios)
 # Definición del panel central
 
 # Formulario que define la interfaz como parametro
-define_interfaz(formulario_interfaz(), data)
+if level_user == None:
+    define_interfaz(formulario_interfaz(), data)
+elif level_user == "Novato":
+    define_interfaz("Novato", data)
+else:
+    define_interfaz("Experto", data)
