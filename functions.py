@@ -1,9 +1,7 @@
 import streamlit as st
-
 from classes import AutoSuv, Camioneta
 
-def formulario_interfaz():
-      
+def formulario_interfaz():      
     placeholder = st.empty()
     with placeholder.form("form_interfaz"):
         st.title('Sistema de apoyo para la elección de vehículos')
