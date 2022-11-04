@@ -5,8 +5,7 @@ data = conexion_datos()
 
 # Formulario que define la interfaz como parametro
 level_user = None
-if level_user == None:
-    formulario_interfaz()
+if level_user == None:    
     level_user = formulario_interfaz()
 else:
     define_interfaz(level_user, data)
