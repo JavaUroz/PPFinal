@@ -8,7 +8,7 @@ level_user = None
 if level_user == None:
     formulario_interfaz()
 else:
-    define_interfaz(level_user, data)
+    define_interfaz('Novato', data)
 
 # if level_user == None:
 #     formulario_interfaz()
