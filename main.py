@@ -7,8 +7,9 @@ data = conexion_datos()
 level_user = None
 if level_user == None:
     formulario_interfaz()
+    level_user = formulario_interfaz()
 else:
-    define_interfaz('Novato', data)
+    define_interfaz(level_user, data)
 
 # if level_user == None:
 #     formulario_interfaz()
