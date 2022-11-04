@@ -6,7 +6,7 @@ from classes import AutoSuv, Camioneta
 def conexion_datos():
     # # Conexión con SQLAlchemy
     path = 'data/'
-    database = 'DSS-Autos.db'
+    database = 'DSS.db'
     my_conn = create_engine('sqlite:///'+path+database)
 
     # Carga los datos de la aplicación
