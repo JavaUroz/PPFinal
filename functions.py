@@ -26,8 +26,8 @@ def formulario_interfaz():
         st.title('Sistema de apoyo para la elección de vehículos')
         st.header('Conteste estas preguntas para definir su perfil')
         st.subheader('¿Es su primer auto?')      
-        primer_auto = st.radio('',['Si', 'No'])
-        mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poca' , 'Intermedia', 'Mucha'])
+        primer_auto = st.radio('Opciones',['Si', 'No'])
+        mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poco' , 'Algo', 'Mucho'])
         col1, col2 = st.columns(2)
         investigo = col1.select_slider('¿Ha investigado acerca de las opciones disponibles en el mercado?',['Nada' , 'Algo', 'Suficiente', 'Todo'])        
         st.subheader('Opciones de financiamiento')       
@@ -36,14 +36,13 @@ def formulario_interfaz():
         st.checkbox('Financiado 100%')
         st.subheader('Cantidad de integrantes')
         integrantes = st.radio('Plazas',['2 plazas, individuo y/o acompañante', 'hasta 4 plazas, grupo familiar tipo 3 o 4 personas', '4 plazas o más, familia numerosa, más de 4 personas'])
-        if integrantes == 'hasta 4 plazas, grupo familiar tipo 3 o 4 personas' or integrantes == '4 plazas o más, familia numerosa, más de 4 personas':
-            st.info('Según sus especificaciones se recomienda elegir un nivel de confort de 4 puntos y seguridad de 5!')
+        
         st.subheader('Conocimiento técnico/mecánico') 
         conocimiento = st.select_slider('conocimiento',['Básico', 'Intermedio', 'Avanzado', 'Experto'])
         # Elegimos criterios para definir usuario 
         submitted = st.form_submit_button("Definir Interfaz")
         if submitted:
-            if (not primer_auto and mecanica('Intermedia', 'Mucha') and investigo('Suficiente' or 'Todo') and (contado or financiado_parcial) and conocimiento('Intermedio' or 'Avanzado' or 'Experto')):    
+            if (not primer_auto and (mecanica=='Poco' or mecanica=='Algo') and (investigo=='Suficiente' or investigo=='Todo') and (contado or financiado_parcial) and (conocimiento=='Intermedio' or conocimiento=='Avanzado' or conocimiento=='Experto')):    
                 level_user = 'Experto'
                 placeholder.empty()
             else:    
@@ -102,22 +101,23 @@ def interfaz_novato(data):
             if tipo == []:
                 col2.error('Elija al menos un tipo de carrocería')
             precio_max = st.slider('Precio en miles de pesos', 0, 30000)
-        submited = st.form_submit_button('Volver a las preguntas')
-        if submited:
-            define_interfaz()
-        # Aplica las opciones de filtrado
-        filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
-        # Aplica la matriz de decisión y la guarda en la variable ponderacion.
-        ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
-        # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
-        if marca == [] or tipo == [] or precio_max == 0:
-            st.warning('Elija sus preferencias para ver las recomendaciones')
-        else:
-            st.markdown('Listado de vehiculos recomendados')
-            st._arrow_table(
-            ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
-                                                                                                ascending=False),
-            )
+            if submited:
+                define_interfaz()
+            # Aplica las opciones de filtrado
+            filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
+            # Aplica la matriz de decisión y la guarda en la variable ponderacion.
+            ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
+            # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
+            if marca == [] or tipo == [] or precio_max == 0:
+                st.warning('Elija sus preferencias para ver las recomendaciones')
+            else:
+                st.markdown('Listado de vehiculos recomendados')
+                st._arrow_table(
+                ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
+                                                                                                        ascending=False),
+                )
+            submited = st.form_submit_button('Volver a las preguntas')
+        
 
 def interfaz_experto(data):
     # Opciones de interfaz para usuarios expertos
