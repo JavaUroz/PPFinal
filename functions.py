@@ -48,9 +48,10 @@ def formulario_interfaz():
         if submitted:
             if (cv and fp and nafta and gasoil and conocimiento > 6):    
                 level_user = 'Experto'
+                placeholder.empty()
             elif ((hp or wt) and (gasolina or biodiesel or querosene) and (fe or fs) and (conocimiento <= 6)):    
                 level_user = 'Novato'
-            placeholder.empty()
+                placeholder.empty()
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos

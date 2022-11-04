@@ -4,11 +4,9 @@ from functions import *
 data = conexion_datos()
 
 # Formulario que define la interfaz como parametro
-level_user = None
-if level_user == None:    
-    level_user = formulario_interfaz()
-else:
-    define_interfaz(level_user, data)
+
+level_user = formulario_interfaz()
+define_interfaz(level_user, data)
 
 # if level_user == None:
 #     formulario_interfaz()
