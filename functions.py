@@ -20,7 +20,7 @@ def conexion_datos():
     return data
 
 def formulario_interfaz():
-    #level_user = None    
+    level_user = None    
     placeholder = st.empty()
     with placeholder.form("form_interfaz"):
         st.title('Sistema de apoyo para la elección de vehículos')
