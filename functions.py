@@ -34,7 +34,9 @@ def formulario_interfaz():
     financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
     financiado_total = st.checkbox('Financiado 100%')    
     if (primer_auto == 'No' and mecanica == 'Mucho' and (investigo == 'Suficiente' or investigo == 'Todo') and (contado or financiado_parcial)):
-        level_user = "Experto"    
+        level_user = "Experto"
+    elif (financiado_total or financiado_parcial or contado):
+        level_user = 'Novato'
     else:
         level_user = 'Novato'        
     return level_user
