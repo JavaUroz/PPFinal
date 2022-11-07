@@ -20,34 +20,25 @@ def conexion_datos():
     return data
 
 def formulario_interfaz():
-    level_user = None    
-    placeholder = st.empty()
-    with placeholder.form(key='form_interfaz'):
-        st.title('Sistema de apoyo para la elección de vehículos')
-        st.header('Conteste estas preguntas para definir su perfil')
-        st.subheader('¿Es su primer auto?')      
-        primer_auto = st.radio('Opciones',['Si', 'No'])
-        mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poco' , 'Algo', 'Mucho'])
-        col1, col2 = st.columns(2)
-        investigo = col1.select_slider('¿Ha investigado acerca de las opciones disponibles en el mercado?',['Nada' , 'Algo', 'Suficiente', 'Todo'])        
-        st.subheader('Opciones de financiamiento')       
-        contado = st.checkbox('Contado/Efectivo o transferencia, valores al día')
-        financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
-        st.checkbox('Financiado 100%')
-        st.subheader('Cantidad de integrantes')
-        integrantes = st.radio('Plazas',['2 plazas, individuo y/o acompañante', 'hasta 4 plazas, grupo familiar tipo 3 o 4 personas', '4 plazas o más, familia numerosa, más de 4 personas'])
-        
-        st.subheader('Conocimiento técnico/mecánico') 
-        conocimiento = st.select_slider('conocimiento',['Básico', 'Intermedio', 'Avanzado', 'Experto'])
-        # Elegimos criterios para definir usuario 
-        submitted = st.form_submit_button("Definir Interfaz")
-        if submitted:
-            if (not primer_auto and (mecanica=='Poco' or mecanica=='Algo') and (investigo=='Suficiente' or investigo=='Todo') and (contado or financiado_parcial) and (conocimiento=='Intermedio' or conocimiento=='Avanzado' or conocimiento=='Experto')):    
-                level_user = 'Experto'
-                placeholder.empty()
-            else:    
-                level_user = 'Novato'
-                placeholder.empty()            
+    st.title('Sistema de apoyo para la elección de vehículos')
+    st.header('Conteste estas preguntas para definir su perfil')
+    st.subheader('¿Es su primer auto?')      
+    primer_auto = st.radio('Opciones',['Si', 'No'])
+    mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poco' , 'Algo', 'Mucho'])
+    col1, col2 = st.columns(2)
+    investigo = col1.select_slider('¿Ha investigado acerca de las opciones disponibles en el mercado?',['Nada' , 'Algo', 'Suficiente', 'Todo'])        
+    st.subheader('Opciones de financiamiento')       
+    contado = st.checkbox('Contado/Efectivo o transferencia, valores al día')
+    financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
+    financiado_total = st.checkbox('Financiado 100%')
+
+    # Elegimos criterios para definir usuario    
+    if (primer_auto == 'No' and mecanica == 'Mucho' and (investigo == 'Suficiente' or investigo == 'Todo') and (contado or financiado_parcial)):
+        level_user = "Experto"
+    elif (primer_auto == 'Si' and mecanica != 'Mucho' and (investigo == 'Nada' or investigo == 'algo') and (financiado_total or financiado_parcial or contado)):
+        level_user = 'Novato'
+    else:
+        level_user = None        
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
@@ -84,79 +75,72 @@ def define_interfaz(level_user, data):
         interfaz_experto(data)
 
 def interfaz_novato(data):
-    # Opciones de interfaz para usuarios novatos
-    with st.form(key='form_novato'):    
-        st.sidebar.caption('Seleccione sus preferencias generales para usuario NOVATO (default)')
-        select_consumo = st.sidebar.slider('Bajo Consumo', 1, 5)
-        select_potencia = st.sidebar.slider('Potencia', 1, 5)
-        select_seguridad = st.sidebar.slider('Seguridad', 1, 5)
-        # Habilita las opciones de filtrado
-        st.markdown('**USUARIO NOVATO**')
-        with st.expander('Seleccione los criterios de filtrado de su preferencia'):
-            col1, col2 = st.columns(2)
-            marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
-            if marca == []:
-                col1.error('Elija al menos una marca de vehículo')
-            tipo = col2.multiselect('Tipo de carrocería', sorted(data['TipoVehiculo'].unique().tolist()))
-            if tipo == []:
-                col2.error('Elija al menos un tipo de carrocería')
-            precio_max = st.slider('Precio en miles de pesos', 0, 30000)
-            if submited:
-                define_interfaz()
-            # Aplica las opciones de filtrado
-            filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
-            # Aplica la matriz de decisión y la guarda en la variable ponderacion.
-            ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
-            # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
-            if marca == [] or tipo == [] or precio_max == 0:
-                st.warning('Elija sus preferencias para ver las recomendaciones')
-            else:
-                st.markdown('Listado de vehiculos recomendados')
-                st._arrow_table(
-                ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
-                                                                                                        ascending=False),
-                )
-            submited = st.form_submit_button('Volver a las preguntas')
+    # Opciones de interfaz para usuarios novatos                           
+    # Habilita las opciones de filtrado    
+    st.subheader('Seleccione los criterios de filtrado de su preferencia')
+    select_consumo = st.slider('Bajo Consumo', 1, 5)
+    select_potencia = st.slider('Potencia', 1, 5)
+    select_seguridad = st.slider('Seguridad', 1, 5)
+    col1, col2 = st.columns(2)           
+    marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
+    if marca == []:
+        col1.error('Elija al menos una marca de vehículo')
+    tipo = col2.multiselect('Tipo de carrocería', sorted(data['TipoVehiculo'].unique().tolist()))
+    if tipo == []:
+        col2.error('Elija al menos un tipo de carrocería')
+    precio_max = st.slider('Precio en miles de pesos', 0, 30000)
+    
+    # Aplica las opciones de filtrado
+    filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
+    # Aplica la matriz de decisión y la guarda en la variable ponderacion.
+    ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
+    
+    # Devuelve los resultados de la recomendación ordenados por puntuación descendente.    
+    if marca == [] or tipo == [] or precio_max == 0:
+        st.warning('Elija sus preferencias para ver las recomendaciones')
+    else:
+        st.header('Listado de vehiculos recomendados')
+        st._arrow_table(
+        ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
+                                                                                                ascending=False),
+        )
+            
+            
+            
         
 
 def interfaz_experto(data):
-    # Opciones de interfaz para usuarios expertos
-    with st.form(key='form_experto'):
-        st.markdown('**USUARIO EXPERTO**')
-        st.sidebar.caption('Seleccione los criterios de filtrado de su preferencia')
-        select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
-        select_potencia=st.sidebar.slider('Potencia', 1, 5)
-        select_seguridad=st.sidebar.slider('Seguridad', 1, 5)
-        select_confort=st.sidebar.slider('Confort', 1, 5)
-        # Habilita las opciones de filtrado
-        with st.expander('Seleccione los criterios de filtrado de su preferencia para usuario EXPERTO'):
-            col1, col2=st.columns(2)
-            marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
-            if marca == []:
-                col1.error('Elija al menos una marca de vehículo')
-            tipo = col1.multiselect('Tipo de vehículo',sorted(data['TipoVehiculo'].unique().tolist()))
-            if tipo == []:
-                col1.error('Elija al menos un tipo de vehículo')
-            transmision = col2.multiselect('Transmisión',['Manual','Automática'])
-            if transmision == []:
-                col2.error('Elija al menos un tipo de transmisón')
-            combustible = col2.multiselect('Combustible', ['Nafta', 'Diesel', 'Híbrido'])
-            if combustible == []:
-                col2.error('Elija al menos un tipo de combustible')
-            precio_max=st.slider('Precio en miles de pesos', 0, 30000)
-        submited = st.form_submit_button('Volver a las preguntas')
-        if submited:
-            define_interfaz()
+    # Opciones de interfaz para usuarios expertos            
+    st.header('Seleccione los criterios de filtrado de su preferencia')
+    select_consumo=st.slider('Bajo Consumo', 1, 5)
+    select_potencia=st.slider('Potencia', 1, 5)
+    select_seguridad=st.slider('Seguridad', 1, 5)
+    select_confort=st.slider('Confort', 1, 5)
+    # Habilita las opciones de filtrado
+    with st.expander('Seleccione los criterios de filtrado de su preferencia para usuario EXPERTO'):
+        col1, col2=st.columns(2)
+        marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
+        if marca == []:
+            col1.error('Elija al menos una marca de vehículo')
+        tipo = col1.multiselect('Tipo de vehículo',sorted(data['TipoVehiculo'].unique().tolist()))
+        if tipo == []:
+            col1.error('Elija al menos un tipo de vehículo')
+        transmision = col2.multiselect('Transmisión',['Manual','Automática'])
+        if transmision == []:
+            col2.error('Elija al menos un tipo de transmisón')
+        combustible = col2.multiselect('Combustible', ['Nafta', 'Diesel', 'Híbrido'])
+        if combustible == []:
+            col2.error('Elija al menos un tipo de combustible')
+        precio_max=st.slider('Precio en miles de pesos', 0, 30000)        
+    
         # Aplica las opciones de filtrado
         filtrado=data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max) & (data['Transmisión'].isin(transmision)) & (data['TipoVehiculo'].isin(tipo)) & (data['Combustible'].isin(combustible))]        
         # Aplica la matriz de decisión y la guarda en la variable ponderacion.
         ponderacion=matriz_decision_experto(filtrado, select_consumo, select_potencia, select_seguridad, select_confort)
         # Devuelve los resultados de la recomendación ordenados por puntuación descendente.
         if marca == [] or tipo == [] or transmision == [] or combustible == [] or precio_max == 0:
-            st.warning('Elija sus preferencias para ver las recomendaciones')
-        else:
-            st.markdown('Listado de vehiculos recomendados')        
-            st._arrow_table(
-            ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
+            st.warning('Elija sus preferencias para ver las recomendaciones')               
+        data = st.dataframe(
+            ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Cilindrada(cc)', 'Potencia(CV)', 'Consumo(Lt/100km)','LinkMasInfo' , 'Puntuacion']].sort_values(by='Puntuacion',
                                                                                                 ascending=False),
             )

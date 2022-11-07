@@ -9,9 +9,3 @@ level_user = formulario_interfaz()
 # Interfaz visualizada de acuerdo a seleccion
 define_interfaz(level_user, data)
 
-# if level_user == None:
-#     formulario_interfaz()
-#     level_user = formulario_interfaz()
-#     define_interfaz(level_user, data)
-# else:    
-#     define_interfaz(level_user, data)
