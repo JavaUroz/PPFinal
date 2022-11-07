@@ -34,11 +34,9 @@ def formulario_interfaz():
     financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
     financiado_total = st.checkbox('Financiado 100%')    
     if (primer_auto == 'No' and mecanica == 'Mucho' and (investigo == 'Suficiente' or investigo == 'Todo') and (contado or financiado_parcial)):
-        level_user = "Experto"
-    elif (primer_auto == 'Si' or mecanica != 'Mucho' and (investigo == 'Nada' or investigo == 'algo') and (financiado_total or financiado_parcial or contado)):
-        level_user = 'Novato'
+        level_user = "Experto"    
     else:
-        level_user = None        
+        level_user = 'Novato'        
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
