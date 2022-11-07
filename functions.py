@@ -75,36 +75,38 @@ def define_interfaz(level_user, data):
         interfaz_experto(data)
 
 def interfaz_novato(data):
-    # Opciones de interfaz para usuarios novatos                          
+    # Opciones de interfaz para usuarios novatos                           
     # Habilita las opciones de filtrado    
     st.subheader('Seleccione los criterios de filtrado de su preferencia')
     select_consumo = st.slider('Bajo Consumo', 1, 5)
     select_potencia = st.slider('Potencia', 1, 5)
     select_seguridad = st.slider('Seguridad', 1, 5)
-    col1, col2 = st.columns(2)           
-    marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
-    if marca == []:
-        col1.error('Elija al menos una marca de vehículo')
-    tipo = col2.multiselect('Tipo de carrocería', sorted(data['TipoVehiculo'].unique().tolist()))
-    if tipo == []:
-        col2.error('Elija al menos un tipo de carrocería')
-    precio_max = st.slider('Precio en miles de pesos', 0, 30000)
-    
-    # Aplica las opciones de filtrado
-    filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
 
-    # Aplica la matriz de decisión y la guarda en la variable ponderacion.
-    ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
-    
-    # Devuelve los resultados de la recomendación ordenados por puntuación descendente.    
-    if marca == [] or tipo == [] or precio_max == 0:
-        st.warning('Elija sus preferencias para ver las recomendaciones')
-    else:
-        st.header('Listado de vehiculos recomendados')
-        st._arrow_table(
-        ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
-                                                                                                ascending=False),
-        )
+    with st.expander('Seleccione los criterios de filtrado de su preferencia para usuario EXPERTO'):
+        col1, col2 = st.columns(2)           
+        marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
+        if marca == []:
+            col1.error('Elija al menos una marca de vehículo')
+        tipo = col2.multiselect('Tipo de carrocería', sorted(data['TipoVehiculo'].unique().tolist()))
+        if tipo == []:
+            col2.error('Elija al menos un tipo de carrocería')
+        precio_max = st.slider('Precio en miles de pesos', 0, 30000)
+        
+        # Aplica las opciones de filtrado
+        filtrado = data[(data['Marca'].isin(marca)) & (data['Precio'] < precio_max)]
+
+        # Aplica la matriz de decisión y la guarda en la variable ponderacion.
+        ponderacion = matriz_decision_novato(filtrado, select_consumo, select_potencia, select_seguridad)
+        
+        # Devuelve los resultados de la recomendación ordenados por puntuación descendente.    
+        if marca == [] or tipo == [] or precio_max == 0:
+            st.warning('Elija sus preferencias para ver las recomendaciones')
+        else:
+            st.header('Listado de vehiculos recomendados')
+            st._arrow_table(
+            ponderacion.loc[:, ['Marca', 'Modelo', 'Version', 'Precio', 'Puntuacion']].sort_values(by='Puntuacion',
+                                                                                                    ascending=False),
+            )
 
 def interfaz_experto(data):
     # Opciones de interfaz para usuarios expertos            
