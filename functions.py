@@ -38,7 +38,7 @@ def formulario_interfaz():
     elif (financiado_total or financiado_parcial or contado):
         level_user = 'Novato'
     else:
-        level_user = 'Novato'        
+        level_user = None        
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
