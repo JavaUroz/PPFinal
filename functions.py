@@ -13,7 +13,6 @@ def conexion_datos():
     vehiculos = pd.read_sql_table('autos',my_conn)
     precios = pd.read_sql_table('precios',my_conn)
     criterios = pd.read_sql_table('criterios', my_conn)
-
     
     # Fusiona los precios con la tabla de vehículos.
     data = agrega_tablas(vehiculos, precios, criterios)

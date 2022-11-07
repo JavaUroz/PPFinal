@@ -1,4 +1,5 @@
-from functions import *
+# Importamos todas las funciones de functions.py 
+from functions import conexion_datos, formulario_interfaz, define_interfaz
 
 # Obtenemos datos en dataframe
 data = conexion_datos()
