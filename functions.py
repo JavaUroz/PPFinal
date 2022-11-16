@@ -20,25 +20,28 @@ def conexion_datos():
 
 # Funcion interfaz para definir tipo de usuario
 def formulario_interfaz():    
-    st.title('Sistema de apoyo para la elección de vehículos')
+    st.title('Sistema de ayuda para la elección de su vehículo 0km')
 
     # Elegimos criterios para definir usuario
-    st.header('Conteste estas preguntas para definir su perfil')
-    st.subheader('¿Es su primer auto?')      
-    primer_auto = st.radio('Opciones',['Si', 'No'])
-    mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poco' , 'Algo', 'Mucho'])
-    col1, col2 = st.columns(2)
-    investigo = col1.select_slider('¿Ha investigado acerca de las opciones disponibles en el mercado?',['Nada' , 'Algo', 'Suficiente', 'Todo'])        
-    st.subheader('Opciones de financiamiento')       
-    contado = st.checkbox('Contado/Efectivo o transferencia, valores al día')
-    financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
-    financiado_total = st.checkbox('Financiado 100%')    
-    if (primer_auto == 'No' and mecanica == 'Mucho' and (investigo == 'Suficiente' or investigo == 'Todo') and (contado or financiado_parcial)):
-        level_user = "Experto"
-    elif (financiado_total or financiado_parcial or contado):
-        level_user = 'Novato'
-    else:
-        level_user = None        
+    with st.sidebar:
+        st.subheader('Elija que tipo de usuario es:')
+        level_user = st.selectbox('Tipo de usuario',('No sé','Novato','Experto'))    
+    if (level_user == 'No sé'):
+        with st.expander('Realice este breve cuestionario para definir su perfil:'):             
+            primer_auto = st.radio('¿Es su primer auto?',['Si', 'No'])
+            mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poco' , 'Algo', 'Mucho'])
+            col1, col2 = st.columns(2)
+            investigo = col1.select_slider('¿Ha investigado acerca de las opciones disponibles en el mercado?',['Nada' , 'Algo', 'Suficiente', 'Todo'])        
+            st.subheader('Opciones de financiamiento')       
+            contado = st.checkbox('Contado/Efectivo o transferencia, valores al día')
+            financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
+            financiado_total = st.checkbox('Financiado 100%')    
+        if (primer_auto == 'No' and mecanica == 'Mucho' and (investigo == 'Suficiente' or investigo == 'Todo') and (contado or financiado_parcial)):
+            level_user = "Experto"
+        elif (financiado_total or financiado_parcial or contado):
+            level_user = 'Novato'
+        else:
+            level_user = None        
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
@@ -76,13 +79,13 @@ def define_interfaz(level_user, data):
 
 def interfaz_novato(data):
     # Opciones de interfaz para usuarios novatos                           
-    # Habilita las opciones de filtrado    
-    st.subheader('Seleccione los criterios de filtrado de su preferencia')
-    select_consumo = st.slider('Bajo Consumo', 1, 5)
-    select_potencia = st.slider('Potencia', 1, 5)
-    select_seguridad = st.slider('Seguridad', 1, 5)
+    # Habilita las opciones de filtrado      
+    st.sidebar.subheader('Criterios de selección:')
+    select_consumo = st.sidebar.slider('Bajo Consumo', 1, 5)
+    select_potencia = st.sidebar.slider('Potencia', 1, 5)
+    select_seguridad = st.sidebar.slider('Seguridad', 1, 5)
 
-    with st.expander('Seleccione los criterios de filtrado de su preferencia para usuario EXPERTO'):
+    with st.expander('Seleccione los elementos de filtrado:'):
         col1, col2 = st.columns(2)           
         marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
         if marca == []:
@@ -109,15 +112,15 @@ def interfaz_novato(data):
             )
 
 def interfaz_experto(data):
-    # Opciones de interfaz para usuarios expertos            
-    st.header('Seleccione los criterios de filtrado de su preferencia')
-    select_consumo=st.slider('Bajo Consumo', 1, 5)
-    select_potencia=st.slider('Potencia', 1, 5)
-    select_seguridad=st.slider('Seguridad', 1, 5)
-    select_confort=st.slider('Confort', 1, 5)
+    # Opciones de interfaz para usuarios expertos
+    st.sidebar.subheader('Criterios de selección:')
+    select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
+    select_potencia=st.sidebar.slider('Potencia', 1, 5)
+    select_seguridad=st.sidebar.slider('Seguridad', 1, 5)
+    select_confort=st.sidebar.slider('Confort', 1, 5)
 
     # Habilita las opciones de filtrado
-    with st.expander('Seleccione los criterios de filtrado de su preferencia para usuario EXPERTO'):
+    with st.expander('Seleccione los elementos de filtrado:'):
         col1, col2=st.columns(2)
         marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))
         if marca == []:
