@@ -115,8 +115,6 @@ def interfaz_novato(data):
 
 def interfaz_experto(data):
     # Opciones de interfaz para usuarios expertos
-    st.write("[Readme](https://github.com/JavaUroz/PPFinal1/blob/main/README.md)")
-    st.write("[Guía de usuario](https://github.com/JavaUroz/PPFinal1/blob/main/GUIA%20DE%20USUARIO.md)") 
     st.sidebar.subheader('Criterios de selección:')
     select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia=st.sidebar.slider('Potencia', 1, 5)
