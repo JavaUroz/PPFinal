@@ -20,12 +20,12 @@ def conexion_datos():
 
 # Funcion interfaz para definir tipo de usuario
 def formulario_interfaz():
-    st.markdown('<div style="text-align: right;"><a href="https://github.com/JavaUroz/PPFinal1/blob/main/README.md">Readme</a></div>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: right;"><a href="https://github.com/JavaUroz/PPFinal/blob/main/README.md">Readme</a></div>', unsafe_allow_html=True)
     st.title('Sistema de ayuda para la elección de su vehículo 0km')
 
     # Elegimos criterios para definir usuario
     with st.sidebar:
-        st.write("[Como usar esta aplicación](https://github.com/JavaUroz/PPFinal1/blob/main/GUIA%20DE%20USUARIO.md)") 
+        st.write("[Como usar esta aplicación](https://github.com/JavaUroz/PPFinal/blob/main/GUIA%20DE%20USUARIO.md)") 
         st.subheader('Elija que tipo de usuario es:')
         level_user = st.selectbox('Tipo de usuario',('No sé','Novato','Experto'))         
     if (level_user == 'No sé'):
