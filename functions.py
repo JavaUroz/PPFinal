@@ -32,7 +32,7 @@ def formulario_interfaz():
             mecanica = st.radio('¿Cuán importante es la mecánica para usted?', ['Poco' , 'Algo', 'Mucho'])
             col1, col2 = st.columns(2)
             investigo = col1.select_slider('¿Ha investigado acerca de las opciones disponibles en el mercado?',['Nada' , 'Algo', 'Suficiente', 'Todo'])        
-            st.subheader('Opciones de financiamiento')       
+            st.write('Opciones de financiamiento')       
             contado = st.checkbox('Contado/Efectivo o transferencia, valores al día')
             financiado_parcial = st.checkbox('Financiamiento con entrega de anticipo/usado')
             financiado_total = st.checkbox('Financiado 100%')    
