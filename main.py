@@ -9,4 +9,3 @@ level_user = formulario_interfaz()
 
 # Interfaz visualizada de acuerdo a seleccion
 define_interfaz(level_user, data)
-
