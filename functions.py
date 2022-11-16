@@ -19,13 +19,15 @@ def conexion_datos():
     return data
 
 # Funcion interfaz para definir tipo de usuario
-def formulario_interfaz():    
+def formulario_interfaz():
+    st.markdown('<div style="text-align: right;"><a href="https://github.com/JavaUroz/PPFinal1/blob/main/README.md">Readme</a></div>', unsafe_allow_html=True)
     st.title('Sistema de ayuda para la elección de su vehículo 0km')
 
     # Elegimos criterios para definir usuario
     with st.sidebar:
+        st.write("[Como usar esta aplicación](https://github.com/JavaUroz/PPFinal1/blob/main/GUIA%20DE%20USUARIO.md)") 
         st.subheader('Elija que tipo de usuario es:')
-        level_user = st.selectbox('Tipo de usuario',('No sé','Novato','Experto'))    
+        level_user = st.selectbox('Tipo de usuario',('No sé','Novato','Experto'))         
     if (level_user == 'No sé'):
         with st.expander('Realice este breve cuestionario para definir su perfil:'):             
             primer_auto = st.radio('¿Es su primer auto?',['Si', 'No'])
@@ -45,7 +47,7 @@ def formulario_interfaz():
     return level_user
 
 # Creamos la función de la matriz de decision para usuarios novatos
-def matriz_decision_novato(dataframe, a, b, c):
+def matriz_decision_novato(dataframe, a, b, c):    
     dataframe['Puntuacion'] = (dataframe['C'] * (1 - a) + 10) + \
                               (dataframe['P'] * b + 10) + (dataframe['S'] * c)
     return dataframe
@@ -84,7 +86,7 @@ def interfaz_novato(data):
     select_consumo = st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia = st.sidebar.slider('Potencia', 1, 5)
     select_seguridad = st.sidebar.slider('Seguridad', 1, 5)
-
+    st.subheader("Interfaz para usuario Novato")
     with st.expander('Seleccione los elementos de filtrado:'):
         col1, col2 = st.columns(2)           
         marca = col1.multiselect('Marca del vehículo', sorted(data['Marca'].unique().tolist()))        
@@ -113,12 +115,14 @@ def interfaz_novato(data):
 
 def interfaz_experto(data):
     # Opciones de interfaz para usuarios expertos
+    st.write("[Readme](https://github.com/JavaUroz/PPFinal1/blob/main/README.md)")
+    st.write("[Guía de usuario](https://github.com/JavaUroz/PPFinal1/blob/main/GUIA%20DE%20USUARIO.md)") 
     st.sidebar.subheader('Criterios de selección:')
     select_consumo=st.sidebar.slider('Bajo Consumo', 1, 5)
     select_potencia=st.sidebar.slider('Potencia', 1, 5)
     select_seguridad=st.sidebar.slider('Seguridad', 1, 5)
     select_confort=st.sidebar.slider('Confort', 1, 5)
-
+    st.subheader("Interfaz para usuario Experto")
     # Habilita las opciones de filtrado
     with st.expander('Seleccione los elementos de filtrado:'):
         col1, col2=st.columns(2)
